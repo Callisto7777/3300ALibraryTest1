@@ -17,7 +17,7 @@ pros::ADIDigitalOut loader('A'); //match loader
 pros::ADIDigitalOut bunny('B'); //bunny ears
 //pros::Rotation scoreRotationSensor(9);
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
-pros::Optical color_sensor(12);
+pros::Optical optical(12);
 
 ez::Drive chassis(
     {2, -1, -13},
