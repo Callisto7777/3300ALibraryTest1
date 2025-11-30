@@ -1,6 +1,9 @@
 lowkey to bum to understand how to use github oopsie doopsie 
+
 someone please tell me how i can link git and vsc but until them imma try and decently organize it...
 try...
+
 whoopsies 
+
 all the important stuff will be under src anyway
 have fun lol :P
