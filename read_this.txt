@@ -1,0 +1,17 @@
+Im going to send it over as a ZipFile I dont remember how to open it but just unzip it and go to VSCode and click open file then click on Skib01
+
+
+-----------------------------------------------
+
+Do not under any circumstance delete any of the code before imforming me
+You can adjust values but do not delete any lines, this includes comments
+
+You can use my code for other teams 
+If they ask what library tell them Lemlib and Ez Template 
+
+-----------------------------------------------
+
+I recommend putting autosave on because i dont think either of you guys will have the habit of saving after everyrun
+If the code doesnt work its prob because you changed something and you didnt save it
+
+(Ctrl + S) if youre stupid
