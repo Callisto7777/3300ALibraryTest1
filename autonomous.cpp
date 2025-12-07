@@ -34,15 +34,15 @@ void default_constants() {
   chassis.odom_turn_bias_set(0.9);
 
   chassis.odom_look_ahead_set(7_in);           // This is how far ahead in the path the robot looks at
-  chassis.odom_boomerang_distance_set(16_in);  // This sets the maximum distance away from target that the carrot point can be
+  chassis.odom_boomerang_distance_set(16_in);  // This sets the maximum distance away from the target that the carrot point can be
   chassis.odom_boomerang_dlead_set(0.625);     // This handles how aggressive the end of boomerang motions are
 
-  chassis.pid_angle_behavior_set(ez::shortest);  // Changes the default behavior for turning, this defaults it to the shortest path there
+  chassis.pid_angle_behavior_set(ez::shortest);  // Changes the default behaviour for turning, this defaults it to the shortest path there
 }
 
 
 // //once again part the waves please :))
-
+//if this function is used, make the previous function into this function and change this function into the opposite function
 void bunnyUp() {
   bool bunnyStatus = false;
 
@@ -57,7 +57,8 @@ void loaderUp() {
   loader.set_value(loaderStatus);
 }
 
-void middleshit() {
+//gets the 3 balls and scores 4 balls into middle, then loads 3 and scores 3 into high
+void middlefirst() {
   
   chassis.pid_drive_set(-32_cm, DRIVE_SPEED, true);
   chassis.pid_wait();
@@ -99,12 +100,8 @@ void middleshit() {
 
 }
 
-
-
-
-
-
-
+//goes to load and scores 4 balls into the high
+//with colour sort cuz loader sometimes grabs a blue ball
 void redLeft() {
     chassis.pid_drive_set(-80_cm, 70, true); //135
     chassis.pid_wait();
@@ -126,7 +123,7 @@ void redLeft() {
 }
 void autonomous() {
   //auton left for red or blue
-    middleshit();
+    middlefirst();
     // chassis.pid_drive_set(-80_cm, 70, true); //135
     // chassis.pid_wait();
     // chassis.pid_turn_set(90_deg, TURN_SPEED);
@@ -146,11 +143,6 @@ void autonomous() {
     // motorstop();  
 
 }
-
-
-
-
-
 
 
 // void left() {
@@ -191,55 +183,5 @@ void autonomous() {
 //   chassis.pid_wait();
 //   pros::delay(3000);
 //   motorstop();
-// }
-
-
-//PART THE WAVES RAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
-//
-//just assume that one tile is 60.8cm long
-
-
-// void redLeft() { 
-//   bool loaderStatus = false;
-//   bool bunnyStatus = false;
-  
-//   //hoarding();
-//   chassis.pid_drive_set(100_cm, 70, true);
-//   chassis.pid_wait();
-//   motorstop();
-//   chassis.pid_turn_set(310_deg, TURN_SPEED);
-//   //hoarding();
-//   chassis.pid_wait();
-//   motorstop();
-//   chassis.pid_drive_set(-70_cm, DRIVE_SPEED, true);
-//   chassis.pid_wait();
-//   chassis.pid_turn_set(45_deg, TURN_SPEED);
-//   chassis.pid_wait();
-//   chassis.pid_drive_set(5_cm, DRIVE_SPEED, true);
-//   middle();
-//   chassis.pid_wait();
-//   motorstop();
-//   chassis.pid_drive_set(-90_cm, DRIVE_SPEED, true);
-//   chassis.pid_wait();
-//   chassis.pid_turn_set(180_deg, TURN_SPEED);
-//   chassis.pid_wait();
-//   loader.set_value(1);
-//   chassis.pid_wait();
-//   chassis.pid_drive_set(50_cm, DRIVE_SPEED, true);
-//   chassis.pid_wait();
-//   //hoarding();
-//   chassis.pid_wait();
-//   motorstop();
-//   chassis.pid_drive_set(-65_cm, DRIVE_SPEED, true);
-//   chassis.pid_wait();
-//   chassis.pid_turn_set(0_deg, TURN_SPEED);
-//   chassis.pid_wait();
-//   chassis.pid_drive_set(5_cm, DRIVE_SPEED, true);
-//   chassis.pid_wait();
-//   high();
-//   chassis.pid_wait();
-//   motorstop();
-//   //remember to have a colour sensor thingy incase we had blue balls
-//   //prep for drive control to start
 // }
 
