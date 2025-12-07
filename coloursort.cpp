@@ -1,6 +1,6 @@
 #include "main.h"
 #include "config.hpp"
-
+//basic kinda importante stuff ig
 
 //bkue coloursort
 void highbluesort() {
@@ -59,4 +59,5 @@ void middleredsort() {
         intake.move_voltage(12000);
         indication_sign.move_voltage(6700); 
       }
+
 }
