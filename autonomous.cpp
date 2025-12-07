@@ -2,7 +2,7 @@
 #include "config.hpp"
 
 // These are out of 127
-const int DRIVE_SPEED = 110;
+const int DRIVE_SPEED = 120;
 const int TURN_SPEED = 90;
 
 void default_constants() {
@@ -50,10 +50,62 @@ void bunnyUp() {
   bunny.set_value(bunnyStatus);
 }
 
+void loaderUp() {
+  bool loaderStatus = false;
 
-void autonomous() {
-  //auton left for red or blue
+  loaderStatus = !loaderStatus;
+  loader.set_value(loaderStatus);
+}
 
+void middleshit() {
+  
+  chassis.pid_drive_set(-32_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  hoarding();
+  chassis.pid_wait();
+  chassis.pid_turn_set(320_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-55_cm, 60, true);
+  chassis.pid_wait();
+  pros::delay(2000);
+  chassis.pid_wait();
+  motorstop();
+  chassis.pid_wait();
+  chassis.pid_drive_set(22_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  chassis.pid_turn_set(227_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(45_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  middle();
+  pros::delay(1700);
+  chassis.pid_wait();
+  motorstop();
+  chassis.pid_drive_set(-127_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_wait();
+  loader.set_value(1);
+  chassis.pid_drive_set(-45_cm, 60, true);
+  hoarding();
+  pros::delay(1700);
+  chassis.pid_wait();
+  chassis.pid_drive_set(110_cm, 67, true);
+  chassis.pid_wait();
+  highredsort();
+  chassis.pid_wait();
+  pros::delay(1700);
+  chassis.pid_wait();
+
+}
+
+
+
+
+
+
+
+void redLeft() {
     chassis.pid_drive_set(-80_cm, 70, true); //135
     chassis.pid_wait();
     chassis.pid_turn_set(90_deg, TURN_SPEED);
@@ -67,10 +119,31 @@ void autonomous() {
     pros::delay(2000);
     chassis.pid_drive_set(140_cm, 70, true);
     chassis.pid_wait();
-    high();
+    highredsort();
     chassis.pid_wait();
-    pros::delay(3000);
+    pros::delay(2000);
     motorstop();  
+}
+void autonomous() {
+  //auton left for red or blue
+    middleshit();
+    // chassis.pid_drive_set(-80_cm, 70, true); //135
+    // chassis.pid_wait();
+    // chassis.pid_turn_set(90_deg, TURN_SPEED);
+    // chassis.pid_wait();
+    // loader.set_value(1);
+    // chassis.pid_wait();
+    // chassis.pid_drive_set(-50_cm, 70, true); //135
+    // chassis.pid_wait();
+    // hoarding();
+    // chassis.pid_wait();
+    // pros::delay(2000);
+    // chassis.pid_drive_set(140_cm, 70, true);
+    // chassis.pid_wait();
+    // high();
+    // chassis.pid_wait();
+    // pros::delay(3000);
+    // motorstop();  
 
 }
 
