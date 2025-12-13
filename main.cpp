@@ -1,7 +1,6 @@
 #include "main.h"
 #include "config.hpp"
 #include "pros/motors.hpp"
-#include "autons.hpp"
 
 void initialize() {
 
@@ -35,7 +34,7 @@ void middle() { // This is for middle
 void low() { //for the lowgoal
   intake.move_voltage(-12000);
   indication_sign.move_voltage(-12000);
-  score.move_voltage(-12000);
+  //score.move_voltage(-12000);
 }
 void motorstop() { // This is for stophoarding
   intake.move_voltage(0); 

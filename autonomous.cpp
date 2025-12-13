@@ -34,15 +34,14 @@ void default_constants() {
   chassis.odom_turn_bias_set(0.9);
 
   chassis.odom_look_ahead_set(7_in);           // This is how far ahead in the path the robot looks at
-  chassis.odom_boomerang_distance_set(16_in);  // This sets the maximum distance away from the target that the carrot point can be
+  chassis.odom_boomerang_distance_set(16_in);  // This sets the maximum distance away from target that the carrot point can be
   chassis.odom_boomerang_dlead_set(0.625);     // This handles how aggressive the end of boomerang motions are
 
-  chassis.pid_angle_behavior_set(ez::shortest);  // Changes the default behaviour for turning, this defaults it to the shortest path there
+  chassis.pid_angle_behavior_set(ez::shortest);  // Changes the default behavior for turning, this defaults it to the shortest path there
 }
 
-
 // //once again part the waves please :))
-//if this function is used, make the previous function into this function and change this function into the opposite function
+
 void bunnyUp() {
   bool bunnyStatus = false;
 
@@ -57,9 +56,15 @@ void loaderUp() {
   loader.set_value(loaderStatus);
 }
 
-//gets the 3 balls and scores 4 balls into middle, then loads 3 and scores 3 into high
-void middlefirst() {
-  
+void autonomous() {
+    redLeft(); 
+    //redRight();
+    //blueLeft();
+    //blueRight();
+    //skills();
+}
+
+void redLeft() {
   chassis.pid_drive_set(-32_cm, DRIVE_SPEED, true);
   chassis.pid_wait();
   hoarding();
@@ -68,13 +73,13 @@ void middlefirst() {
   chassis.pid_wait();
   chassis.pid_drive_set(-55_cm, 60, true);
   chassis.pid_wait();
-  pros::delay(2000);
+  pros::delay(1000);
   chassis.pid_wait();
   motorstop();
   chassis.pid_wait();
   chassis.pid_drive_set(22_cm, DRIVE_SPEED, true);
   chassis.pid_wait();
-  chassis.pid_turn_set(227_deg, TURN_SPEED);
+  chassis.pid_turn_set(225_deg, TURN_SPEED);
   chassis.pid_wait();
   chassis.pid_drive_set(45_cm, DRIVE_SPEED, true);
   chassis.pid_wait();
@@ -92,17 +97,178 @@ void middlefirst() {
   pros::delay(1700);
   chassis.pid_wait();
   chassis.pid_drive_set(110_cm, 67, true);
+  loader.set_value(0);
   chassis.pid_wait();
-  highredsort();
+  high();
+  //highredsort();
   chassis.pid_wait();
   pros::delay(1700);
   chassis.pid_wait();
+}
+
+void redRight() {
+  chassis.pid_drive_set(-32_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  hoarding();
+  chassis.pid_wait();
+  chassis.pid_turn_set(40_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-55_cm, 60, true);
+  chassis.pid_wait();
+  pros::delay(1000);
+  chassis.pid_wait();
+  chassis.pid_drive_set(22_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  chassis.pid_turn_set(315_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-35_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  low();
+  pros::delay(1700);
+  chassis.pid_wait();
+  motorstop();
+  chassis.pid_drive_set(122_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_wait();
+  loader.set_value(1);
+  chassis.pid_drive_set(-45_cm, 60, true);
+  hoarding();
+  pros::delay(1300);
+  chassis.pid_wait();
+  chassis.pid_drive_set(110_cm, 67, true);
+  //loader.set_value(0);
+  chassis.pid_wait();
+  high();
+  //highredsort();
+  chassis.pid_wait();
+  pros::delay(1700);
+  chassis.pid_wait();
+}
+
+void blueLeft() {
+  chassis.pid_drive_set(-32_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  hoarding();
+  chassis.pid_wait();
+  chassis.pid_turn_set(320_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-55_cm, 60, true);
+  chassis.pid_wait();
+  pros::delay(1000);
+  chassis.pid_wait();
+  chassis.pid_drive_set(22_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  chassis.pid_turn_set(225_deg, TURN_SPEED);
+  motorstop();
+  chassis.pid_drive_set(-127_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_wait();
+  loader.set_value(1);
+  chassis.pid_drive_set(-45_cm, 60, true);
+  hoarding();
+  pros::delay(1700);
+  chassis.pid_wait();
+  chassis.pid_drive_set(110_cm, 67, true);
+  loader.set_value(0);
+  chassis.pid_wait();
+  //high();
+  highbluesort();
+  chassis.pid_wait();
+  pros::delay(1700);
+  chassis.pid_wait();
+  //backward
+  //315
+  //forward
+  //0
+  //bunny
+  //forward
+  //end
 
 }
 
-//goes to load and scores 4 balls into the high
-//with colour sort cuz loader sometimes grabs a blue ball
-void redLeft() {
+void blueRight() {
+  chassis.pid_drive_set(-32_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  hoarding();
+  chassis.pid_wait();
+  chassis.pid_turn_set(40_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-55_cm, 60, true);
+  chassis.pid_wait();
+  pros::delay(1000);
+  chassis.pid_wait();
+  motorstop();
+  chassis.pid_wait();
+  chassis.pid_drive_set(22_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  chassis.pid_turn_set(135_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(45_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  low();
+  pros::delay(1700);
+  chassis.pid_wait();
+  motorstop();
+  chassis.pid_drive_set(-127_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_wait();
+  loader.set_value(1);
+  chassis.pid_drive_set(-45_cm, 60, true);
+  hoarding();
+  pros::delay(1700);
+  chassis.pid_wait();
+  chassis.pid_drive_set(110_cm, 67, true);
+  loader.set_value(0);
+  chassis.pid_wait();
+  //high();
+  highbluesort();
+  chassis.pid_wait();
+  pros::delay(1700);
+  chassis.pid_wait();
+}
+
+void stupidonethatdavidwantsbruh() {
+  chassis.pid_drive_set(-32_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  hoarding();
+  chassis.pid_wait();
+  chassis.pid_turn_set(320_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-55_cm, 60, true);
+  chassis.pid_wait();
+  pros::delay(1000);
+  chassis.pid_wait();
+  motorstop();
+  chassis.pid_wait();
+  chassis.pid_drive_set(22_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  chassis.pid_turn_set(225_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(45_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  middle();
+  pros::delay(1700);
+  chassis.pid_wait();
+  motorstop();
+  chassis.pid_drive_set(-127_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_wait();
+  loader.set_value(1);
+  chassis.pid_drive_set(-45_cm, 60, true);
+  hoarding();
+}
+
+
+//sort later
+void skills() {
+  //plan out skills
+}
+
+void westmechnov() {
     chassis.pid_drive_set(-80_cm, 70, true); //135
     chassis.pid_wait();
     chassis.pid_turn_set(90_deg, TURN_SPEED);
@@ -121,67 +287,88 @@ void redLeft() {
     pros::delay(2000);
     motorstop();  
 }
-void autonomous() {
-  //auton left for red or blue
-    middlefirst();
-    // chassis.pid_drive_set(-80_cm, 70, true); //135
-    // chassis.pid_wait();
-    // chassis.pid_turn_set(90_deg, TURN_SPEED);
-    // chassis.pid_wait();
-    // loader.set_value(1);
-    // chassis.pid_wait();
-    // chassis.pid_drive_set(-50_cm, 70, true); //135
-    // chassis.pid_wait();
-    // hoarding();
-    // chassis.pid_wait();
-    // pros::delay(2000);
-    // chassis.pid_drive_set(140_cm, 70, true);
-    // chassis.pid_wait();
-    // high();
-    // chassis.pid_wait();
-    // pros::delay(3000);
-    // motorstop();  
 
+void leftnotsort() {
+  chassis.pid_drive_set(-80_cm, 70, true); //135
+  chassis.pid_wait();
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  chassis.pid_wait();
+  loader.set_value(1);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-50_cm, 70, true); //135
+  chassis.pid_wait();
+  hoarding();
+  chassis.pid_wait();
+  pros::delay(2000);
+  chassis.pid_drive_set(140_cm, 70, true);
+  chassis.pid_wait();
+  high();
+  chassis.pid_wait();
+  pros::delay(3000);
+  motorstop();
 }
 
+void rightnotsort(){
+  chassis.pid_drive_set(-80_cm, 70, true); //135
+  chassis.pid_wait();
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  loader.set_value(1);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-50_cm, 70, true); //135
+  chassis.pid_wait();
+  hoarding();
+  chassis.pid_wait();
+  pros::delay(2000);
+  chassis.pid_drive_set(140_cm, 70, true);
+  chassis.pid_wait();
+  high();
+  chassis.pid_wait();
+  pros::delay(3000);
+  motorstop();
+}
 
-// void left() {
-//   chassis.pid_drive_set(-80_cm, 70, true); //135
-//   chassis.pid_wait();
-//   chassis.pid_turn_set(270_deg, TURN_SPEED);
-//   chassis.pid_wait();
-//   loader.set_value(1);
-//   chassis.pid_wait();
-//   chassis.pid_drive_set(-50_cm, 70, true); //135
-//   chassis.pid_wait();
-//   hoarding();
-//   chassis.pid_wait();
-//   pros::delay(2000);
-//   chassis.pid_drive_set(140_cm, 70, true);
-//   chassis.pid_wait();
-//   high();
-//   chassis.pid_wait();
-//   pros::delay(3000);
-//   motorstop();
-// }
-
-// void right(){
-//   chassis.pid_drive_set(-80_cm, 70, true); //135
-//   chassis.pid_wait();
-//   chassis.pid_turn_set(90_deg, TURN_SPEED);
-//   chassis.pid_wait();
-//   loader.set_value(1);
-//   chassis.pid_wait();
-//   chassis.pid_drive_set(-50_cm, 70, true); //135
-//   chassis.pid_wait();
-//   hoarding();
-//   chassis.pid_wait();
-//   pros::delay(2000);
-//   chassis.pid_drive_set(140_cm, 70, true);
-//   chassis.pid_wait();
-//   high();
-//   chassis.pid_wait();
-//   pros::delay(3000);
-//   motorstop();
-// }
+void notsort1() { 
+  bool loaderStatus = false;
+  bool bunnyStatus = false;
+  
+  //hoarding();
+  chassis.pid_drive_set(100_cm, 70, true);
+  chassis.pid_wait();
+  motorstop();
+  chassis.pid_turn_set(310_deg, TURN_SPEED);
+  //hoarding();
+  chassis.pid_wait();
+  motorstop();
+  chassis.pid_drive_set(-70_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  chassis.pid_turn_set(45_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(5_cm, DRIVE_SPEED, true);
+  middle();
+  chassis.pid_wait();
+  motorstop();
+  chassis.pid_drive_set(-90_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_wait();
+  loader.set_value(1);
+  chassis.pid_wait();
+  chassis.pid_drive_set(50_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  //hoarding();
+  chassis.pid_wait();
+  motorstop();
+  chassis.pid_drive_set(-65_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  chassis.pid_turn_set(0_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(5_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  high();
+  chassis.pid_wait();
+  motorstop();
+  //remember to have a colour sensor thingy incase we had blue balls
+  //prep for drive control to start
+}
 

@@ -2,7 +2,8 @@
 #include "config.hpp"
 
 void opcontrol() {
-    withsort();
+    //withsort();
+    woutsort();
 }
 //control stuff
 void withsort() {
