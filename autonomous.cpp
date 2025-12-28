@@ -56,13 +56,50 @@ void loaderUp() {
   loader.set_value(loaderStatus);
 }
 
-void autonomous() {
-    redLeft(); 
-    //redRight();
-    //blueLeft();
-    //blueRight();
-    //skills();
+//auton code stuff
+void soloautonred() {
+  chassis.pid_drive_set(12_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(36_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-12_in, DRIVE_SPEED); //get to the goal
+  chassis.pid_wait();
+  high(); //score
+  chassis.pid_drive_set(20_in, DRIVE_SPEED); //go A6 bottom right corner
+  chassis.pid_wait();
+  chassis.pid_turn_set(45_deg, TURN_SPEED);
+  chassis.pid_wait();
+  hoaring();  //while going to middle goal get the 3 balls in center
+  chassis.pid_drive_set(30_in, DRIVE_SPEED);//go to middle goal (hopefully aline) *mightneedtogo slowerngl
+  chassis.pid_wait();
+  motorstop();
+  middle();
+  pros::delay(2000);
+  chassis.pid_drive_set(-12_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(104.41_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(38_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_wait();
+  loaderUp();
+  hoaring();
+  chassis.pid_drive_set(13_in, DRIVE_SPEED);//go a lil slower so that the balls dont fly out
+  chassis.pid_wait();
+  pros::delay(2000);
+  chassis.pid_drive_set(-25_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  high();
 }
+
+
+
+
 
 void redLeft() {
   chassis.pid_drive_set(-32_cm, DRIVE_SPEED, true);
@@ -157,9 +194,17 @@ void blueLeft() {
   chassis.pid_wait();
   pros::delay(1000);
   chassis.pid_wait();
+  motorstop();
+  chassis.pid_wait();
   chassis.pid_drive_set(22_cm, DRIVE_SPEED, true);
   chassis.pid_wait();
   chassis.pid_turn_set(225_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(45_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  middle();
+  pros::delay(1700);
+  chassis.pid_wait();
   motorstop();
   chassis.pid_drive_set(-127_cm, DRIVE_SPEED, true);
   chassis.pid_wait();
@@ -173,8 +218,8 @@ void blueLeft() {
   chassis.pid_drive_set(110_cm, 67, true);
   loader.set_value(0);
   chassis.pid_wait();
-  //high();
-  highbluesort();
+  high();
+  //highredsort();
   chassis.pid_wait();
   pros::delay(1700);
   chassis.pid_wait();
@@ -199,32 +244,30 @@ void blueRight() {
   chassis.pid_wait();
   pros::delay(1000);
   chassis.pid_wait();
-  motorstop();
-  chassis.pid_wait();
   chassis.pid_drive_set(22_cm, DRIVE_SPEED, true);
   chassis.pid_wait();
-  chassis.pid_turn_set(135_deg, TURN_SPEED);
+  chassis.pid_turn_set(315_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(45_cm, DRIVE_SPEED, true);
+  chassis.pid_drive_set(-35_cm, DRIVE_SPEED, true);
   chassis.pid_wait();
   low();
   pros::delay(1700);
   chassis.pid_wait();
   motorstop();
-  chassis.pid_drive_set(-127_cm, DRIVE_SPEED, true);
+  chassis.pid_drive_set(122_cm, DRIVE_SPEED, true);
   chassis.pid_wait();
   chassis.pid_turn_set(180_deg, TURN_SPEED);
   chassis.pid_wait();
   loader.set_value(1);
   chassis.pid_drive_set(-45_cm, 60, true);
   hoarding();
-  pros::delay(1700);
+  pros::delay(1300);
   chassis.pid_wait();
   chassis.pid_drive_set(110_cm, 67, true);
-  loader.set_value(0);
+  //loader.set_value(0);
   chassis.pid_wait();
-  //high();
-  highbluesort();
+  high();
+  //highredsort();
   chassis.pid_wait();
   pros::delay(1700);
   chassis.pid_wait();
@@ -262,12 +305,17 @@ void stupidonethatdavidwantsbruh() {
   hoarding();
 }
 
-
-//sort later
 void skills() {
   //plan out skills
+  high();
+  chassis.pid_wait();
+  chassis.pid_drive_set(-50_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  chassis.pid_drive_set(300.67_cm, DRIVE_SPEED, true);
+  chassis.pid_wait();
 }
 
+//sort later
 void westmechnov() {
     chassis.pid_drive_set(-80_cm, 70, true); //135
     chassis.pid_wait();
