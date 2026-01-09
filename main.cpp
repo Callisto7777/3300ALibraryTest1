@@ -29,7 +29,7 @@ void high() { // This is for high
 void middle() { // This is for middle
   intake.move_voltage(12000); //positive to intake
   indication_sign.move_voltage(12000); //positive for middle goal
-  score.move_voltage(-12000);
+  score.move_voltage(-6000);
 }
 void low() { //for the lowgoal
   intake.move_voltage(-12000);
@@ -43,6 +43,6 @@ void motorstop() { // This is for stophoarding
 }
 void hoarding() { // This is for hoarding
   intake.move_voltage(12000); //positive to intake
-  indication_sign.move_voltage(-12000); //negitive to put into hoarding area
+  indication_sign.move_voltage(0); //negitive to put into hoarding area
   score.move_voltage(0); 
 }

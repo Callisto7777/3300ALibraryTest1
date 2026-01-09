@@ -1,14 +1,14 @@
 #include "main.h"
 #include "config.hpp"
 
-void opcontrol() {
-    //withsort();
-    woutsort();
-}
+// void opcontrol() {
+//     withsort();
+//     //woutsort();
+// }
 //control stuff
 void withsort() {
 
-    std::string alliance_colour = "red";
+    std::string alliance_colour = "red"; //change the colour sort plspslpslspls
 
     bool bunnyStatus = false;
     bool loaderStatus = false;
@@ -67,8 +67,6 @@ void withsort() {
 
 
 void woutsort() {
-
-    std::string alliance_colour = "red";
 
     bool bunnyStatus = false;
     bool loaderStatus = false;
