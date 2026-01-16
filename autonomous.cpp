@@ -2,24 +2,21 @@
 #include "config.hpp"
 
 // These are out of 127
-const int DRIVE_SPEED = 125;
-const int TURN_SPEED = 90;
+const int DRIVE_SPEED = 135;
+const int TURN_SPEED = 100;
 
 void default_constants() {
   // P, I, D, and Start I
-  chassis.pid_drive_constants_set(20.0, 0.0, 100.0);         // Fwd/rev constants, used for odom and non odom motions
-  chassis.pid_heading_constants_set(11.0, 0.0, 20.0);        // Holds the robot straight while going forward without odom
+  chassis.pid_drive_constants_set(36.7, 17.0, 276.7);         // Fwd/rev constants, used for odom and non odom motions
+  chassis.pid_heading_constants_set(10.0, 0.0, 20.0);        // Holds the robot straight while going forward without odom
+  
   chassis.pid_turn_constants_set(3.0, 0.05, 20.0, 15.0);     // Turn in place constants
   chassis.pid_swing_constants_set(6.0, 0.0, 65.0);           // Swing constants
-  chassis.pid_odom_angular_constants_set(6.5, 0.0, 52.5);    // Angular control for odom motions
-  chassis.pid_odom_boomerang_constants_set(5.8, 0.0, 32.5);  // Angular control for boomerang motions
 
   // Exit conditions
   chassis.pid_turn_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 500_ms);
   chassis.pid_swing_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 500_ms);
   chassis.pid_drive_exit_condition_set(90_ms, 1_in, 250_ms, 3_in, 500_ms, 500_ms);
-  chassis.pid_odom_turn_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 750_ms);
-  chassis.pid_odom_drive_exit_condition_set(90_ms, 1_in, 250_ms, 3_in, 500_ms, 750_ms);
   chassis.pid_turn_chain_constant_set(3_deg);
   chassis.pid_swing_chain_constant_set(5_deg);
   chassis.pid_drive_chain_constant_set(3_in);
@@ -57,54 +54,97 @@ void loaderUp() {
 }
 
 //auton code stuff
-void soloautonred() {
+void soloautonred() { 
+
+
   chassis.pid_drive_set(31_in, DRIVE_SPEED);
   chassis.pid_wait();
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(20_in, DRIVE_SPEED); //get to the goal
+  chassis.pid_drive_set(21_in, DRIVE_SPEED); //get to the goal
   chassis.pid_wait();
   high(); //score
-  pros::delay(500);
-  chassis.pid_drive_set(-20_in, DRIVE_SPEED); //go A6 bottom right corner
+  pros::delay(600);
+  chassis.pid_drive_set(-19_in, DRIVE_SPEED); //go A6 bottom right corner
   chassis.pid_wait();
   chassis.pid_turn_set(315_deg, TURN_SPEED);//ended here
   chassis.pid_wait();
   hoarding();  //while going to middle goal get the 3 balls in center
-  chassis.pid_drive_set(-45_in, DRIVE_SPEED);//go to middle goal (hopefully aline) *mightneedtogo slowerngl
+  chassis.pid_drive_set(-40_in, DRIVE_SPEED);//go to middle goal (hopefully aline) *mightneedtogo slowerngl
   chassis.pid_wait();
-  loader.set_value(1);
   chassis.pid_turn_set(135_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(12_in, DRIVE_SPEED);
+  chassis.pid_drive_set(11_in, DRIVE_SPEED);
+  chassis.pid_wait();
   middle();
-  pros::delay(100);
+  pros::delay(350);
   motorstop();
+  loader.set_value(1);
   chassis.pid_drive_set(-12_in, DRIVE_SPEED);
   chassis.pid_wait();
   chassis.pid_turn_set(194.41_deg, TURN_SPEED); // this works very well
   chassis.pid_wait();
-  chassis.pid_drive_set(67_in, 150);
+  chassis.pid_drive_set(68_in, 150);
   chassis.pid_wait();
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait();
   chassis.pid_drive_set(-25_in, DRIVE_SPEED);
+  chassis.pid_wait();
   hoarding();
-  pros::delay(1200);
   chassis.pid_drive_set(45_in, 100);//go a lil slower so that the balls dont fly out
   chassis.pid_wait();
-  pros::delay(1200);
-  chassis.pid_drive_set(-25_in, 130);
-  chassis.pid_wait();
-  high();
+  pros::delay(10000);
+  chassis.pid_drive_set(-25_in, 145);
+  chassis.pid_wait();  
+  intake.move_voltage(12000); //positive to intake
+  indication_sign.move_voltage(12000); //positive for middle goal
+  score.move_voltage(12000);
+  pros::delay(2000);
 }
 
 
 void pidtesting() {
-  chassis.pid_drive_set(37_in, DRIVE_SPEED);
+  chassis.pid_drive_set(10_in, DRIVE_SPEED);
   chassis.pid_wait();
 }
 
+
+
+void rightrush() {
+  chassis.pid_drive_set(-30_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  hoarding();
+  loader.set_value(1); 
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-20_in, 67); //get to the goal
+  chassis.pid_wait();
+  pros::delay(670);
+  chassis.pid_drive_set(50_in, 100); //go A6 bottom right corner
+  loader.set_value(1); 
+  chassis.pid_wait();
+  indication_sign.move_voltage(-10000); //positive for middle goal
+  pros::delay(267);
+  high();
+  pros::delay(2967);
+  motorstop();
+  bunny.set_value(1);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-12_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(45_deg, TURN_SPEED);  
+  chassis.pid_wait();
+  chassis.pid_drive_set(13_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(90_deg, TURN_SPEED);  
+  bunny.set_value(0);
+  chassis.pid_wait();
+  chassis.pid_drive_set(25_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(45_deg, TURN_SPEED);  
+
+
+}
 
 void redLeft() {
   chassis.pid_drive_set(-32_cm, DRIVE_SPEED, true);
@@ -121,7 +161,7 @@ void redLeft() {
   chassis.pid_wait();
   motorstop();
   chassis.pid_wait();
-  chassis.pid_drive_set(22_cm, DRIVE_SPEED, true);
+  chassis.pid_drive_set(19_cm, DRIVE_SPEED, true);
   chassis.pid_wait();
   chassis.pid_turn_set(225_deg, TURN_SPEED);
   chassis.pid_wait();
@@ -131,21 +171,20 @@ void redLeft() {
   pros::delay(1500);
   chassis.pid_wait();
   motorstop();
-  chassis.pid_drive_set(-127_cm, DRIVE_SPEED, true);
+  chassis.pid_drive_set(-137_cm, DRIVE_SPEED, true);
   chassis.pid_wait();
   chassis.pid_turn_set(180_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(-45_cm, 60, true);
+  chassis.pid_drive_set(-45_cm, 100, true);
   hoarding();
-  pros::delay(1400);
+  pros::delay(1000);
   chassis.pid_wait();
-  chassis.pid_drive_set(110_cm, 67, true);
-  loader.set_value(0);
+  chassis.pid_drive_set(110_cm, 145, true);
   chassis.pid_wait();
+  indication_sign.move_voltage(-10000); //positive for middle goal
+  pros::delay(100);
   high();
-  //highredsort();
-  chassis.pid_wait();
-  pros::delay(1700);
+  pros::delay(2670);
   chassis.pid_wait();
 }
 
@@ -170,7 +209,7 @@ void redRight() {
   pros::delay(1700);
   chassis.pid_wait();
   motorstop();
-  chassis.pid_drive_set(122_cm, DRIVE_SPEED, true);
+  chassis.pid_drive_set(200_cm, DRIVE_SPEED, true);
   chassis.pid_wait();
   chassis.pid_turn_set(180_deg, TURN_SPEED);
   chassis.pid_wait();
@@ -179,7 +218,7 @@ void redRight() {
   hoarding();
   pros::delay(1300);
   chassis.pid_wait();
-  chassis.pid_drive_set(110_cm, 67, true);
+  chassis.pid_drive_set(110_cm, 100, true);
   //loader.set_value(0);
   chassis.pid_wait();
   high();
@@ -309,16 +348,6 @@ void stupidonethatdavidwantsbruh() {
   loader.set_value(1);
   chassis.pid_drive_set(-45_cm, 60, true);
   hoarding();
-}
-
-void skills() {
-  //plan out skills
-  high();
-  chassis.pid_wait();
-  chassis.pid_drive_set(-50_cm, DRIVE_SPEED, true);
-  chassis.pid_wait();
-  chassis.pid_drive_set(300.67_cm, DRIVE_SPEED, true);
-  chassis.pid_wait();
 }
 
 //sort later
